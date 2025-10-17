@@ -83,12 +83,12 @@ s : (Ord a, Num a) =>
 s []           = pure 0        -- Base I.   The maximized sum for a list of zero elements is zero.
 s [x]          = pure x        -- Base II.  The maximized sum for a list of one element is the element itself.
 s [x, y]       =               -- Base III. The maximized sum for a list of two elements is the maximum element
-    let m = max x y in         -- between the two elements.
+    let m=max x y in           -- between the two elements.
     modify (ins 2 m) >>
     pure m
 s xs@(x::y::r) = 
     get >>= \st =>
-    let n = length xs in
+    let n=length xs in
     case lku n st of
         Just r  => pure r
         Nothing => 

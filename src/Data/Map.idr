@@ -11,18 +11,18 @@ empty = Nil
 
 export
 lku : Eq k => k -> Map k v -> Maybe v
-lku _ Nil = Nothing
+lku _ Nil          = Nothing
 lku k ((k',v')::r) = 
     if k == k' then Just v' else lku k r
 
 export
 ins : Eq k => k -> v -> Map k v -> Map k v
-ins k v Nil = [(k, v)]
-ins k v ((k', v')::r) =
+ins k v Nil          = [(k,v)]
+ins k v ((k',v')::r) =
     if k == k' then (k,v)::r else (k',v')::ins k v r
 
 export
 del : Eq k => k -> Map k v -> Map k v
-del _ Nil = Nil
+del _ Nil          = Nil
 del k ((k',v')::r) =
     if k == k' then r else (k',v')::del k r
