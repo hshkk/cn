@@ -1,8 +1,8 @@
 package c
 version = 0.1.0
-author  = hshkk
+authors = "hshkk"
 -- maintainers =
-license = MIT
+license = "MIT"
 -- brief =
 -- readme =
 -- homepage =
@@ -15,7 +15,8 @@ langversion >= 0.5.1
 -- depends =
 
 -- modules to install
-modules = C
+modules = Control.Memoization,
+          Data.Map
 
 -- main file (i.e. file to load at REPL)
 -- main =
