@@ -1,0 +1,10 @@
+[custom.all.c]
+type = "local"
+path = "."
+ipkg = "c.ipkg"
+test = "test/test.ipkg"
+
+[custom.all.c-test]
+type = "local"
+path = "test"
+ipkg = "test.ipkg"

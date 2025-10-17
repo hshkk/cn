@@ -1,0 +1,46 @@
+package c
+version = 0.1.0
+author  = hshkk
+-- maintainers =
+license = MIT
+-- brief =
+-- readme =
+-- homepage =
+-- sourceloc =
+-- bugtracker =
+
+langversion >= 0.5.1
+
+-- packages to add to search path
+-- depends =
+
+-- modules to install
+modules = C
+
+-- main file (i.e. file to load at REPL)
+-- main =
+
+-- name of executable
+-- executable =
+-- opts =
+sourcedir = "src"
+-- builddir =
+-- outputdir =
+
+-- script to run before building
+-- prebuild =
+
+-- script to run after building
+-- postbuild =
+
+-- script to run after building, before installing
+-- preinstall =
+
+-- script to run after installing
+-- postinstall =
+
+-- script to run before cleaning
+-- preclean =
+
+-- script to run after cleaning
+-- postclean =
