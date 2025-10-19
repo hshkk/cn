@@ -5,7 +5,6 @@ module Control.Memoization
 
 import Control.Monad.State
 import Data.Map
-import Data.SortedMap
 
 ||| The memoization type.
 ||| @ s The type of identifier for each cached computation.
@@ -78,8 +77,7 @@ rf n = evalState empty (f n)
 ||| which results from adding 4, 8, and 3 together.
 |||
 ||| xs @ A list of `n` orderable and summable elements.
-s : (Ord a, Num a) => 
-    (xs : List a) -> M Nat a
+s : (Ord a, Num a) => (xs : List a) -> M Nat a
 s []           = pure 0        -- Base I.   The maximized sum for a list of zero elements is zero.
 s [x]          = pure x        -- Base II.  The maximized sum for a list of one element is the element itself.
 s [x, y]       =               -- Base III. The maximized sum for a list of two elements is the maximum element
@@ -100,6 +98,5 @@ s xs@(x::y::r) =
 
 ||| Executes `s`.
 ||| @ xs The argument to `s`.
-rs : (Ord a, Num a) => 
-     (xs : List a) -> a
+rs : (Ord a, Num a) => (xs : List a) -> a
 rs xs = evalState empty (s xs)
