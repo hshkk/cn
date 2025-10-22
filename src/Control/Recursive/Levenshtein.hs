@@ -1,7 +1,9 @@
 module Control.Recursive.Levenshtein where
 
-import Control.Memoization (M)
+import Control.Memoization (M')
 import Control.Monad.State (get, modify, evalState)
+import Data.Bifunctor      (first)
+
 import qualified Data.Map as M
 
 d :: String -> String -> Int
@@ -14,24 +16,26 @@ d l@(x:xs) r@(y:ys)
                 , d l  ys
                 , d xs ys ] + 1
 
-d' :: Int -> Int -> String -> String -> M (Int,Int) Int
-d' i 0  _ _ = return i
-d' 0  j _ _ = return j
-d' i  j  l r =
-    get >>= \st ->
-    case M.lookup (i,j) st of
+type String2 = (String,String)
+
+d' :: Int -> Int -> M' (M.Map (Int,Int) Int,String2) Int
+d' i 0 = return i
+d' 0 j = return j
+d' i j =
+    get >>= \(m,(l,r)) ->
+    case M.lookup (i,j) m of
         Just n  -> return n
-        Nothing -> 
+        Nothing ->
             (let li = i-1; lj = j-1 in
-            if l !! li == r !! lj 
-            then d' li lj l r
-            else d' li j  l r >>= \del ->
-                 d' i  lj l r >>= \ins ->
-                 d' li lj l r >>= \sub ->
+            if l !! li == r !! lj
+            then d' li lj
+            else d' li j  >>= \del ->
+                 d' i  lj >>= \ins ->
+                 d' li lj >>= \sub ->
                  return (minimum [del,ins,sub] + 1))
-            >>= \z -> 
-            modify (M.insert (i,j) z) >> 
+            >>= \z ->
+            modify (first (M.insert (i, j) z)) >>
             return z
 
 rd' :: String -> String -> Int
-rd' x y = evalState (d' (length x) (length y) x y) M.empty
+rd' x y = evalState (d' (length x) (length y)) (M.empty,(x,y))
