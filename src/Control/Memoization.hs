@@ -6,5 +6,5 @@ import Data.Map            (Map)
 -- | The memoization type.
 type M s a = M' (Map s a) a
 
--- | A general memoization type
+-- | A general memoization type.
 type M' s a = State s a

@@ -34,7 +34,7 @@ d' i j =
                  d' li lj >>= \sub ->
                  return (minimum [del,ins,sub] + 1))
             >>= \z ->
-            modify (first (M.insert (i, j) z)) >>
+            modify (first (M.insert (i,j) z)) >>
             return z
 
 rd' :: String -> String -> Int
