@@ -2,7 +2,6 @@ module Control.Recursive.Subset where
 
 import Control.Memoization (M)
 import Control.Monad.State (get, modify, evalState)
-import Data.Bool (bool)
 
 import qualified Data.Map as M
 
@@ -31,12 +30,6 @@ s' (x:xs) t i =
                       return c
                  else modify (M.insert (i+1,t-x) False) >>
                       return False
-
-andM :: (Monad m) => m Bool -> m Bool -> m Bool
-andM m1 m2 = m1 >>= \x -> if x then m2 else return False
-
-orM :: (Monad m) => m Bool -> m Bool -> m Bool
-orM m1 m2 = m1 >>= \x -> if x then return True else m2
 
 rs' :: (Ord a,Num a) => [a] -> a -> Bool
 rs' xs t = evalState (s' xs t 0) M.empty

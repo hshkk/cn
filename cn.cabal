@@ -60,6 +60,7 @@ library
     -- Modules exported by the library.
     exposed-modules:  Control.Memoization
                       Control.Recursive.Levenshtein
+                      Control.Recursive.Subset
 
     -- Modules included in this library but not exported.
     -- other-modules:
@@ -103,4 +104,5 @@ test-suite cn-test
     -- Test dependencies.
     build-depends:
         base >=4.18.3.0 && <4.19,
-        cn
+        cn,
+        QuickCheck >=2.17.1.0 && <2.18
